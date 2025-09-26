@@ -1,0 +1,8 @@
+# environmental variables and files
+
+# database file
+
+# python generated file
+__pycache__
+
+# static root files
