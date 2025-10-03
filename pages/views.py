@@ -47,13 +47,25 @@ def contact_view(request):
                 """
                 
                 try:
-                    send_mail(
-                        subject,
-                        email_message,
-                        settings.EMAIL_HOST_USER,
-                        [settings.EMAIL_HOST_USER],
-                        fail_silently=False,
-                    )
+                    if settings.DEBUG:
+                        # it is for gmail configuration locally
+                        send_mail(
+                            subject,
+                            email_message,
+                            settings.EMAIL_HOST_USER,
+                            [settings.EMAIL_HOST_USER,],
+                            fail_silently=False,
+                        )
+                    else:
+                        #it is configure for sendgrid
+                        send_mail(
+                            subject,
+                            email_message,
+                            settings.DEFAULT_FROM_EMAIL,
+                            ['squalporeover.ju@gmail.com',],
+                            fail_silently=False,
+                        )
+                        
                     return JsonResponse({
                         'status': 'success',
                         'message': 'Your message has been sent successfully!'
