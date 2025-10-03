@@ -18,7 +18,7 @@ Installation :
 
 #Create .env file and inside it create those variable according to .env_example file.
 
-#To generate django secret key the the command.
+#To generate django secret key run the command.
 
 ```python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'```
 
