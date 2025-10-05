@@ -7,6 +7,7 @@ import json
 import logging
 
 
+
 logger = logging.getLogger(__name__)
 # all the views here
 
@@ -16,7 +17,6 @@ def home(request):
     template = "pages/home.html"
 
     return render(request, template, context)
-
 
 
 

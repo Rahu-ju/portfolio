@@ -70,7 +70,8 @@ p {
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   letter-spacing: -1px;
-  color: #5b5b5b;
+  color: #212121 !important;
+  /* color: #5b5b5b; */
 }
 
 h1 {
@@ -354,10 +355,9 @@ b, strong {
   color: #ffffff;
 }
 .dark-mode .feature-card .uil,
-.dark-mode .navbar-light .navbar-brand,
 .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6,
 .dark-mode .color-mode {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .dark-mode .owl-carousel .owl-nav button.owl-next,
 .dark-mode .owl-carousel .owl-nav button.owl-prev,
@@ -476,8 +476,9 @@ b, strong {
 .contact-form .form-control:not(textarea) {
   height: 48px;
 }
-.contact-form .form-control:hover, .contact-form .form-control:focus {
+.contact-form .form-control:hover, .contact-form .form-control:focus, .contact-form .form-control:active {
   border-color: #ffc200;
+  color: #ffc200;
 }
 .contact-form .submit-btn {
   background: #ffc200;
@@ -624,3 +625,6 @@ b, strong {
     padding: 14px;
 } */
 
+/* .color-mode:hover, .color-mode-icon:hover {
+  color: #FFC200 !important;
+} */
