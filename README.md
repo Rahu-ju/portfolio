@@ -20,7 +20,7 @@ Installation :
 
 #To generate django secret key run the command.
 
-```python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'```
+```python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key()'  ```
 
 #Run the server when .env file is ready as same as .env_example
 

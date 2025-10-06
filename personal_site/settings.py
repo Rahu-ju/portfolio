@@ -149,3 +149,14 @@ else:
     EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')  # Your API key
     DEFAULT_FROM_EMAIL = config('SENDGRID_FROM_EMAIL')  # Your verified email
     EMAIL_TIMEOUT = 10
+
+# security settings for production
+if DEBUG == False:
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_PRELOAD = True
