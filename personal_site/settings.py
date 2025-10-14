@@ -130,25 +130,11 @@ STATIC_ROOT = 'static_root/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-    
-if DEBUG:
-    # it is for email configuration using gmail SMTP locally
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Replace with your Gmail
-    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Use App Password
-else:
-    # SendGrid for production (Render)
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.sendgrid.net'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = 'apikey'  # This is literally the string 'apikey'
-    EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')  # Your API key
-    DEFAULT_FROM_EMAIL = config('SENDGRID_FROM_EMAIL')  # Your verified email
-    EMAIL_TIMEOUT = 10
+# Email configuration
+SENDGRID_API_KEY = config('SENDGRID_API_KEY')
+SENDGRID_FROM_EMAIL = config('SENDGRID_FROM_EMAIL')
+
+
 
 # security settings for production
 if DEBUG == False:
