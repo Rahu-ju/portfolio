@@ -12,15 +12,14 @@ from sendgrid.helpers.mail import Mail
 
 
 logger = logging.getLogger(__name__)
-# all the views here
+
 
 def home(request):
-
+    '''Remove extra white spaces'''
     context = {'pagename': 'Hello man', 'name':'imran',}
     template = "pages/home.html"
 
     return render(request, template, context)
-
 
 
 def contact_view(request):

@@ -130,10 +130,9 @@ STATIC_ROOT = 'static_root/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Email configuration
+# Email configuration for sendgrid
 SENDGRID_API_KEY = config('SENDGRID_API_KEY')
 SENDGRID_FROM_EMAIL = config('SENDGRID_FROM_EMAIL')
-
 
 
 # security settings for production
