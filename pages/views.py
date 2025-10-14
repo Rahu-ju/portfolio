@@ -6,6 +6,9 @@ from .forms import ContactForm
 import json
 import logging
 
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 
 
 logger = logging.getLogger(__name__)
@@ -33,49 +36,32 @@ def contact_view(request):
             if form.is_valid():
                 name = form.cleaned_data['name']
                 email = form.cleaned_data['email']
-                message = form.cleaned_data['message']
+                form_message = form.cleaned_data['message']
                 
-                # Compose email
-                subject = f'Contact Form Message from {name}'
-                email_message = f"""
-                    New contact form submission:
-                    Name: {name}
-                    Email: {email}
+                # Using SendGrid to send email
+                message = Mail(
+                    from_email=settings.SENDGRID_FROM_EMAIL,
+                    to_emails='squalporeover.ju@gmail.com',
+                    subject= f'From portfolio site {name}',
+                    html_content=f'<strong>{form_message}<br></br>{email}</strong>'
+                    )
 
-                    Message:
-                    {message}
-                """
-                
                 try:
-                    if settings.DEBUG:
-                        # it is for gmail configuration locally
-                        send_mail(
-                            subject,
-                            email_message,
-                            settings.EMAIL_HOST_USER,
-                            [settings.EMAIL_HOST_USER,],
-                            fail_silently=False,
-                        )
-                    else:
-                        #it is configure for sendgrid
-                        send_mail(
-                            subject,
-                            email_message,
-                            settings.DEFAULT_FROM_EMAIL,
-                            ['squalporeover.ju@gmail.com',],
-                            fail_silently=False,
-                        )
-                        
+                    sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+                    response = sg.send(message)
+                       
                     return JsonResponse({
                         'status': 'success',
                         'message': 'Your message has been sent successfully!'
                     })
                 except Exception as e:
-                    logger.exception('Error sending email: %s', e)
+                    logger.error(f'Error sending email: {e}')
+
                     return JsonResponse({
                         'status': 'error',
                         'message': 'Failed to send email. Please try again later.'
                     }, status=500)
+
             else:
                 return JsonResponse(
                     {'status': 'error',
@@ -84,6 +70,7 @@ def contact_view(request):
                     status=400)
                 
         except json.JSONDecodeError:
+
             return JsonResponse({
                 'status': 'error',
                 'message': 'Invalid request data.'
