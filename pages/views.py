@@ -4,14 +4,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
 import json
-import logging
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-
-
-logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -20,6 +16,7 @@ def home(request):
     template = "pages/home.html"
 
     return render(request, template, context)
+
 
 
 def contact_view(request):
@@ -53,9 +50,7 @@ def contact_view(request):
                         'status': 'success',
                         'message': 'Your message has been sent successfully!'
                     })
-                except Exception as e:
-                    logger.error(f'Error sending email: {e}')
-
+                except:
                     return JsonResponse({
                         'status': 'error',
                         'message': 'Failed to send email. Please try again later.'
@@ -68,8 +63,7 @@ def contact_view(request):
                     'errors': form.errors}, 
                     status=400)
                 
-        except json.JSONDecodeError:
-
+        except:
             return JsonResponse({
                 'status': 'error',
                 'message': 'Invalid request data.'
