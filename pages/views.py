@@ -11,8 +11,8 @@ from sendgrid.helpers.mail import Mail
 
 
 def home(request):
-    '''Remove extra white spaces'''
-    context = {'pagename': 'Hello man', 'name':'imran',}
+    ''' Return Home page template'''
+    context = {}
     template = "pages/home.html"
 
     return render(request, template, context)
