@@ -20,8 +20,9 @@ def home(request):
 
 
 def contact_view(request):
-    ''' Handle contact form submission via AJAX and send email.
-        and also send JSON response back to the front end site which shows message.
+    ''' 
+    Handle contact form submission via AJAX and send email.
+    and also send JSON response back to the front end site which shows success or error masseges message.
     '''
     if request.method == 'POST':
         try:
